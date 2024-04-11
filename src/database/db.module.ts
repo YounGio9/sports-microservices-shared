@@ -3,19 +3,25 @@ import { PrismaService } from "./db.service";
 
 @Module({})
 export class DatabaseModule {
-  static forRoot(dataBaseUrl: string): DynamicModule {
+  static forRoot(options: {
+    imports: any[];
+    inject: any[];
+    useFactory: (...args: any[]) => any;
+  }): DynamicModule {
     const Prisma = {
       provide: PrismaService,
       useFactory: () =>
         new PrismaService({
           datasources: {
             db: {
-              url: dataBaseUrl,
+              url: options.useFactory().dbUrl,
             },
           },
         }),
     };
     return {
+      global: true,
+      imports: options.imports,
       module: DatabaseModule,
       providers: [Prisma],
       exports: [Prisma],
