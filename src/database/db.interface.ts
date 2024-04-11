@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaService } from "./db.service";
 
 export interface DbConfig {
-  entities: PrismaClient;
+  entities: PrismaService;
 }
