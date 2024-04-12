@@ -1,25 +1,29 @@
 import { DynamicModule, Global, Module, Inject } from "@nestjs/common";
 import { PrismaService } from "./db.service";
-import { ConfigModule, ConfigService } from "../config";
+import { ConfigService } from "../config";
 
 @Global()
 @Module({})
 export class DatabaseModule {
   static forRootAsync(options: {
     imports: any[];
-    useFactory?: (...args: any[]) => any;
+    useFactory?: (...args: any[]) => string;
     inject: any[];
   }): DynamicModule {
     const Prisma = {
       provide: PrismaService,
-      useFactory: (configService: ConfigService) =>
-        new PrismaService({
+      useFactory: (configService: ConfigService) => {
+        console.log(configService.get().db.url, "DB URL");
+        return new PrismaService({
           datasources: {
             db: {
-              url: configService.get().db.url,
+              url: options.useFactory
+                ? options.useFactory()
+                : configService.get().db.url,
             },
           },
-        }),
+        });
+      },
       inject: options.inject,
     };
 
