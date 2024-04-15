@@ -8,7 +8,7 @@ export const DEFAULT_CONFIG: ConfigData = {
     url: process.env.DATABASE_URL!,
   },
   auth: {
-    expiresIn: 30000,
+    expiresIn: "1d",
     access_token_secret: "",
     refresh_token_secret: "",
   },
@@ -17,18 +17,26 @@ export const DEFAULT_CONFIG: ConfigData = {
     password: "",
   },
   logLevel: "",
-  userService: {
+  memberService: {
     options: {
-      host: "",
-      port: 3000,
+      client: {
+        brokers: [`kafka:9092`],
+      },
+      consumer: {
+        groupId: `member-consumer`,
+      },
     },
-    transport: Transport.TCP,
+    transport: Transport.KAFKA,
   },
   authService: {
     options: {
-      host: "",
-      port: 3000,
+      client: {
+        brokers: [`kafka:9092`],
+      },
+      consumer: {
+        groupId: `auth-consumer`,
+      },
     },
-    transport: Transport.TCP,
+    transport: Transport.KAFKA,
   },
 };

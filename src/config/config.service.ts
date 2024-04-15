@@ -25,40 +25,27 @@ export class ConfigService {
         access_token_secret: env.JWT_ACCESS_TOKEN_SECRET!,
         refresh_token_secret: env.JWT_REFRESH_TOKEN_SECRET!,
       },
-      userService: {
+      memberService: {
         options: {
-          host: env.USER_SERVICE_HOST!,
-          port: Number(env.USER_SERVICE_PORT!),
+          client: {
+            brokers: [`${env.KAFKA_HOST}:${env.KAFKA_PORT}`],
+          },
+          consumer: {
+            groupId: `member-consumer`,
+          },
         },
-        transport: Transport.TCP,
-      },
-      tokenService: {
-        options: {
-          host: env.TOKEN_SERVICE_HOST!,
-          port: Number(env.TOKEN_SERVICE_PORT!),
-        },
-        transport: Transport.TCP,
+        transport: Transport.KAFKA,
       },
       authService: {
         options: {
-          host: env.AUTH_SERVICE_HOST!,
-          port: Number(env.AUTH_SERVICE_PORT!),
+          client: {
+            brokers: [`${env.KAFKA_HOST}:${env.KAFKA_PORT}`],
+          },
+          consumer: {
+            groupId: `auth-consumer`,
+          },
         },
-        transport: Transport.GRPC,
-      },
-      redisService: {
-        options: {
-          host: env.REDIS_SERVICE_HOST!,
-          port: Number(env.REDIS_SERVICE_PORT!),
-        },
-        transport: Transport.REDIS,
-      },
-      rmqService: {
-        options: {
-          host: env.RMQ_SERVICE_HOST!,
-          port: Number(env.RMQ_SERVICE_PORT!),
-        },
-        transport: Transport.RMQ,
+        transport: Transport.KAFKA,
       },
     };
   }

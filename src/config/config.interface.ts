@@ -1,3 +1,5 @@
+import { KafkaOptions } from "@nestjs/microservices";
+
 export interface ConfigDatabase {
   url: string;
 }
@@ -8,7 +10,7 @@ export interface ConfigSwagger {
 }
 
 export interface AuthConfig {
-  expiresIn: number;
+  expiresIn: number | string;
   access_token_secret: string;
   refresh_token_secret: string;
 }
@@ -35,9 +37,7 @@ export interface ConfigData {
   logLevel: string;
 
   auth: AuthConfig;
-  userService?: UserServiceConfig;
-  tokenService?: UserServiceConfig;
-  authService?: UserServiceConfig;
-  redisService?: UserServiceConfig;
-  rmqService?: UserServiceConfig;
+  memberService?: KafkaOptions;
+  authService?: KafkaOptions;
+  coachService?: KafkaOptions;
 }
