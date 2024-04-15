@@ -1,5 +1,1 @@
-import { PrismaService } from "./db.service";
-
-export interface DbConfig {
-  entities: PrismaService;
-}
+export type { User, Post, Prisma } from "@prisma/client";
