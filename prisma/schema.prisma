@@ -34,6 +34,7 @@ model Club {
   id        String   @id @default(uuid())
   name      String
   sportId   String
+  sport     Sport    @relation(fields: [sportId], references: [id])
   createdAt DateTime @default(now())
   userId    String
   users     User[]
@@ -45,4 +46,5 @@ model Sport {
   image             String
   minPlayersPerGame Int
   createdAt         DateTime @default(now())
+  clubs             Club[]
 }
