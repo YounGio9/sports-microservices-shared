@@ -13,17 +13,36 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
-  id          String @id @default(uuid())
-  title       String
-  author      User   @relation(fields: [userId], references: [id])
-  description String
-  userId      String
-}
-
 model User {
-  id        String @id @default(uuid())
+  id        String   @id @default(uuid())
   firstName String
   lastName  String
-  posts     Post[]
+  password  String
+  role      Role     @default(USER)
+  clubId    String
+  club      Club     @relation(fields: [clubId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+enum Role {
+  USER
+  COACH
+  ADMIN
+}
+
+model Club {
+  id        String   @id @default(uuid())
+  name      String
+  sportId   String
+  createdAt DateTime @default(now())
+  userId    String
+  users     User[]
+}
+
+model Sport {
+  id                String   @id @default(uuid())
+  name              String
+  image             String
+  minPlayersPerGame Int
+  createdAt         DateTime @default(now())
 }
