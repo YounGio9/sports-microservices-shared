@@ -25,27 +25,22 @@ export class ConfigService {
         access_token_secret: env.JWT_ACCESS_TOKEN_SECRET!,
         refresh_token_secret: env.JWT_REFRESH_TOKEN_SECRET!,
       },
-      memberService: {
-        options: {
-          client: {
-            brokers: [`${env.KAFKA_HOST}:${env.KAFKA_PORT}`],
-          },
-          consumer: {
-            groupId: `member-consumer`,
-          },
-        },
-        transport: Transport.KAFKA,
-      },
+      // notificationService: {
+      //   options: {
+      //     client: {
+      //       brokers: [`${env.KAFKA_HOST}:${env.KAFKA_PORT}`],
+      //     },
+      //     consumer: {
+      //       groupId: `notification-consumer`,
+      //     },
+      //   },
+      //   transport: Transport.KAFKA,
+      // },
       authService: {
         options: {
-          client: {
-            brokers: [`${env.KAFKA_HOST}:${env.KAFKA_PORT}`],
-          },
-          consumer: {
-            groupId: `auth-consumer`,
-          },
+          port: DEFAULT_CONFIG.port,
         },
-        transport: Transport.KAFKA,
+        transport: Transport.TCP,
       },
     };
   }

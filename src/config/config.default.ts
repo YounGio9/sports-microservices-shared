@@ -17,26 +17,4 @@ export const DEFAULT_CONFIG: ConfigData = {
     password: "",
   },
   logLevel: "",
-  memberService: {
-    options: {
-      client: {
-        brokers: [`kafka:9092`],
-      },
-      consumer: {
-        groupId: `member-consumer`,
-      },
-    },
-    transport: Transport.KAFKA,
-  },
-  authService: {
-    options: {
-      client: {
-        brokers: [`kafka:9092`],
-      },
-      consumer: {
-        groupId: `auth-consumer`,
-      },
-    },
-    transport: Transport.KAFKA,
-  },
 };
