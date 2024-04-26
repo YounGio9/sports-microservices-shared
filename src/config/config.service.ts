@@ -37,9 +37,6 @@ export class ConfigService {
       //   transport: Transport.KAFKA,
       // },
       authService: {
-        options: {
-          port: DEFAULT_CONFIG.port,
-        },
         transport: Transport.TCP,
       },
     };
