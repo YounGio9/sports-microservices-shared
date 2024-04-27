@@ -56,6 +56,10 @@ export class ConfigService {
     return {
       username: env.SWAGGER_USERNAME || defaultConfig.username,
       password: env.SWAGGER_PASSWORD || defaultConfig.password,
+      title: defaultConfig.title,
+      description: defaultConfig.description,
+      version: defaultConfig.version,
+      // tags: ["Test"],
     };
   }
 

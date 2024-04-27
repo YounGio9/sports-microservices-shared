@@ -15,6 +15,10 @@ export const DEFAULT_CONFIG: ConfigData = {
   swagger: {
     username: "",
     password: "",
+    title: "NestJS Test",
+    description: "Test",
+    version: "1.0",
+    // tags: ["Test"],
   },
   logLevel: "",
 };

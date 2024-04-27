@@ -7,6 +7,9 @@ export interface ConfigDatabase {
 export interface ConfigSwagger {
   username: string;
   password: string;
+  title: string;
+  description: string;
+  version: string;
 }
 
 export interface AuthConfig {
