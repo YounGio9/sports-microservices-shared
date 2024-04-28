@@ -1,6 +1,6 @@
 import { Injectable, NestMiddleware } from "@nestjs/common";
 import { Request, Response } from "express";
-import moment from "moment";
+import dayjs from "dayjs";
 import { v4 as uuidv4 } from "uuid";
 import { Logger } from "./logger";
 export interface RequestLog extends Request {
@@ -60,7 +60,7 @@ export class LoggerMiddleware implements NestMiddleware<Request, Response> {
       "%x2": `trace=${req.correlationId}`,
       "%x3": "type=Incoming request",
       "%u": "-", // todo: parse req.headers.authorization?
-      "%t": `date=[${moment().format("DD/MMM/YYYY:HH:mm:ss ZZ")}]`,
+      "%t": `date=[${dayjs().format("DD/MMM/YYYY:HH:mm:ss ZZ")}]`,
       "%r": `request=${req.method} ${req.originalUrl} ${req.httpVersion}`,
       "%>s": `status=${res.statusCode}`,
       "%b": size === 0 ? "size=-" : `size=${size}`,

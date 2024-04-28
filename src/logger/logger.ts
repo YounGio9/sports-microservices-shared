@@ -1,6 +1,6 @@
 import { Injectable, LoggerService } from "@nestjs/common";
 import { ConfigService } from "../config";
-import moment from "moment";
+import dayjs from "dayjs";
 import * as winston from "winston";
 
 import { isLogLevel, LogLevel } from "./loglevel";
@@ -11,7 +11,7 @@ const formatter = winston.format((info) => {
     return info;
   }
   if (process.env.NODE_ENV !== "test") {
-    info.message = `[${moment().format("ddd MMM DD HH:mm:ss YYYY")}] [${
+    info.message = `[${dayjs().format("ddd MMM DD HH:mm:ss YYYY")}] [${
       info.level
     }] ${info.message}`;
   }

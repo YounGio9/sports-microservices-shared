@@ -38,6 +38,10 @@ export class ConfigService {
       // },
       authService: {
         transport: Transport.TCP,
+        options: {
+          host: "localhost",
+          port: 3001,
+        },
       },
     };
   }

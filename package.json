@@ -1,6 +1,6 @@
 {
   "name": "@youngio9/sports-shared-microservices",
-  "version": "1.0.44",
+  "version": "1.0.56",
   "description": "Shared utils for sports management microservices app",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -19,8 +19,9 @@
     "@nestjs/microservices": "^10.3.7",
     "@nestjs/platform-express": "^10.0.0",
     "@prisma/client": "^5.12.1",
+    "dayjs": "^1.11.10",
     "express": "^4.19.2",
-    "moment": "^2.30.1",
+    "pino": "^9.0.0",
     "typescript": "^5.4.4",
     "uuid": "^8.3.2",
     "winston": "^3.13.0"
