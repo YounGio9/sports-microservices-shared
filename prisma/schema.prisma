@@ -14,19 +14,20 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  firstName String
-  lastName  String
-  email     String   @unique
-  password  String
-  role      Role     @default(USER)
-  clubId    String?
-  club      Club?    @relation(fields: [clubId], references: [id])
-  createdAt DateTime @default(now())
+  id           String   @id @default(uuid())
+  firstName    String
+  lastName     String
+  email        String   @unique
+  password     String
+  role         Role     @default(PLAYER)
+  clubId       String?
+  club         Club?    @relation(fields: [clubId], references: [id])
+  createdAt    DateTime @default(now())
+  refreshToken String?  @unique
 }
 
 enum Role {
-  USER
+  PLAYER
   COACH
   ADMIN
 }
