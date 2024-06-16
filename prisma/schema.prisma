@@ -19,7 +19,7 @@ model User {
   lastName     String
   email        String   @unique
   password     String
-  picture      String
+  picture      String?
   role         Role     @default(PLAYER)
   clubId       String?
   club         Club?    @relation(fields: [clubId], references: [id])
@@ -40,7 +40,7 @@ model Club {
   sport        Sport    @relation(fields: [sportId], references: [id])
   teamCapacity Int
   teamAgeRange String
-  picture      String
+  picture      String?
   createdAt    DateTime @default(now())
   userId       String
   users        User[]
@@ -49,7 +49,7 @@ model Club {
 model Sport {
   id                String   @id @default(uuid())
   name              String
-  image             String
+  image             String?
   minPlayersPerGame Int
   createdAt         DateTime @default(now())
   clubs             Club[]
