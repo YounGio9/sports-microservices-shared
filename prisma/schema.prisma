@@ -19,6 +19,7 @@ model User {
   lastName     String
   email        String   @unique
   password     String
+  picture      String
   role         Role     @default(PLAYER)
   clubId       String?
   club         Club?    @relation(fields: [clubId], references: [id])
@@ -33,13 +34,16 @@ enum Role {
 }
 
 model Club {
-  id        String   @id @default(uuid())
-  name      String
-  sportId   String
-  sport     Sport    @relation(fields: [sportId], references: [id])
-  createdAt DateTime @default(now())
-  userId    String
-  users     User[]
+  id           String   @id @default(uuid())
+  name         String
+  sportId      String
+  sport        Sport    @relation(fields: [sportId], references: [id])
+  teamCapacity Int
+  teamAgeRange String
+  picture      String
+  createdAt    DateTime @default(now())
+  userId       String
+  users        User[]
 }
 
 model Sport {
