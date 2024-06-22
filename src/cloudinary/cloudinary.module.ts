@@ -11,11 +11,13 @@ export class CloudinaryModule {
     useFactory?: (...args: any[]) => string;
     inject: any[];
   }): DynamicModule {
-    const Cloudinary = {
+    const CloudinaryFactory = {
       provide: CloudinaryService,
       useFactory: (configService: ConfigService) => {
         console.log("Cloudinary module is now active");
-        return cloudinary.config(configService.get().cloudinary);
+        cloudinary.config(configService.get().cloudinary);
+
+        return new CloudinaryService();
       },
       inject: options.inject,
     };
@@ -23,8 +25,8 @@ export class CloudinaryModule {
     return {
       imports: options.imports,
       module: CloudinaryModule,
-      providers: [Cloudinary],
-      exports: [Cloudinary],
+      providers: [CloudinaryFactory],
+      exports: [CloudinaryFactory],
     };
   }
 }

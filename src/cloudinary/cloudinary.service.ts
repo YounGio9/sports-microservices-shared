@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, OnModuleInit } from "@nestjs/common";
 import { v2 as cloudinary } from "cloudinary";
 import { CloudinaryResponse } from "./cloudinary-response.interface";
 import streamifier = require("streamifier");
