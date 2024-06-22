@@ -12,6 +12,12 @@ export interface ConfigSwagger {
   version: string;
 }
 
+export interface CloudinaryConfig {
+  cloud_name: string;
+  api_key: string;
+  api_secret: string;
+}
+
 export interface AuthConfig {
   expiresIn: number | string;
   access_token_secret: string;
@@ -36,9 +42,8 @@ export interface ConfigData {
   db: ConfigDatabase;
 
   swagger: ConfigSwagger;
-
+  cloudinary: CloudinaryConfig;
   logLevel: string;
-
   auth: AuthConfig;
   userService?: TcpOptions;
   authService?: TcpOptions;

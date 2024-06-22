@@ -1,6 +1,11 @@
 import { Injectable } from "@nestjs/common";
 import { DEFAULT_CONFIG } from "./config.default";
-import { ConfigData, ConfigDatabase, ConfigSwagger } from "./config.interface";
+import {
+  CloudinaryConfig,
+  ConfigData,
+  ConfigDatabase,
+  ConfigSwagger,
+} from "./config.interface";
 import { Transport } from "@nestjs/microservices";
 @Injectable()
 export class ConfigService {
@@ -18,6 +23,7 @@ export class ConfigService {
       env: env.NODE_ENV || DEFAULT_CONFIG.env,
       port: parseInt(env.PORT!, 10),
       db: this.parseDBConfig(env, DEFAULT_CONFIG.db),
+      cloudinary: this.parseCloudinaryConfig(env),
       swagger: this.parseSwaggerConfig(env, DEFAULT_CONFIG.swagger),
       logLevel: env.LOG_LEVEL!,
       auth: {
@@ -51,6 +57,16 @@ export class ConfigService {
   ) {
     return {
       url: env.DATABASE_URL || defaultConfig.url,
+    };
+  }
+
+  private parseCloudinaryConfig(
+    env: NodeJS.ProcessEnv
+  ): Readonly<CloudinaryConfig> {
+    return {
+      cloud_name: env.CLOUDINARY_CLOUD_NAME || "",
+      api_key: env.CLOUDINARY_API_KEY || "",
+      api_secret: env.CLOUDINARY_API_SECRET || "",
     };
   }
   private parseSwaggerConfig(
