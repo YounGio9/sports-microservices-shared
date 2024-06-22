@@ -23,7 +23,7 @@ export class ConfigService {
       env: env.NODE_ENV || DEFAULT_CONFIG.env,
       port: parseInt(env.PORT!, 10),
       db: this.parseDBConfig(env, DEFAULT_CONFIG.db),
-      cloudinary: this.parseCloudinaryConfig(env),
+      cloudinary: this.parseCloudinaryConfig(env, DEFAULT_CONFIG.cloudinary),
       swagger: this.parseSwaggerConfig(env, DEFAULT_CONFIG.swagger),
       logLevel: env.LOG_LEVEL!,
       auth: {
@@ -61,12 +61,13 @@ export class ConfigService {
   }
 
   private parseCloudinaryConfig(
-    env: NodeJS.ProcessEnv
-  ): Readonly<CloudinaryConfig> {
+    env: NodeJS.ProcessEnv,
+    defaultConfig: Readonly<CloudinaryConfig>
+  ) {
     return {
-      cloud_name: env.CLOUDINARY_CLOUD_NAME || "",
-      api_key: env.CLOUDINARY_API_KEY || "",
-      api_secret: env.CLOUDINARY_API_SECRET || "",
+      cloud_name: env.CLOUDINARY_CLOUD_NAME || defaultConfig.cloud_name,
+      api_key: env.CLOUDINARY_API_KEY || defaultConfig.api_key,
+      api_secret: env.CLOUDINARY_API_SECRET || defaultConfig.api_secret,
     };
   }
   private parseSwaggerConfig(

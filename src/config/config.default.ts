@@ -1,5 +1,4 @@
 import { ConfigData } from "./config.interface";
-import { Transport } from "@nestjs/microservices";
 
 export const DEFAULT_CONFIG: ConfigData = {
   port: Number(process.env.PORT || 3001),
@@ -12,13 +11,17 @@ export const DEFAULT_CONFIG: ConfigData = {
     access_token_secret: "",
     refresh_token_secret: "",
   },
+  cloudinary: {
+    cloud_name: "",
+    api_key: "",
+    api_secret: "",
+  },
   swagger: {
     username: "",
     password: "",
     title: "NestJS Test",
     description: "Test",
     version: "1.0",
-    // tags: ["Test"],
   },
   logLevel: "",
 };
