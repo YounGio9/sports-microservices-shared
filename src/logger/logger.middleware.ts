@@ -1,7 +1,7 @@
 import { Injectable, NestMiddleware } from "@nestjs/common";
 import { Request, Response } from "express";
 import dayjs from "dayjs";
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuid } from "uuid";
 import { Logger } from "./logger";
 export interface RequestLog extends Request {
   correlationId?: string | string[];
@@ -15,10 +15,11 @@ export class LoggerMiddleware implements NestMiddleware<Request, Response> {
   public constructor(private logger: Logger) {}
 
   public use(req: RequestLog, res: Response, next: () => void): any {
+    this.logger.log("LoggerMiddleware invoked");
     const before = Date.now();
     const id = req.headers["x-request-id"]
       ? req.headers["x-request-id"]
-      : uuidv4();
+      : uuid();
     this.logger.setDefaultMeta(id as string);
     const span = req.headers["x-span"] || "0";
     req.correlationId = id;
@@ -44,9 +45,7 @@ export class LoggerMiddleware implements NestMiddleware<Request, Response> {
     }
     return 0;
   }
-  /*
-   date=${moment().format('DD/MMM/YYYY:HH:mm:ss ZZ')} trace=${id} type=IncomingRequest endpoint=${req.originalUrl} duration=${duration} span=${span} status=${res.statusCode} 
-   */
+
   private generateLogMessage(
     req: RequestLog,
     res: Response,

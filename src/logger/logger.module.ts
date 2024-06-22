@@ -6,7 +6,6 @@ import { LoggerMiddleware } from "./logger.middleware";
 
 @Module({
   imports: [ConfigModule],
-  controllers: [],
   providers: [Logger],
   exports: [Logger],
 })
