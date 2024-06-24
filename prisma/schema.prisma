@@ -25,6 +25,7 @@ model User {
   club         Club?    @relation(fields: [clubId], references: [id])
   createdAt    DateTime @default(now())
   refreshToken String?  @unique
+  ownedClub    Club?    @relation("OwnedClub")
 }
 
 enum Role {
@@ -42,8 +43,9 @@ model Club {
   teamAgeRange String
   picture      String?
   createdAt    DateTime @default(now())
-  userId       String
-  users        User[]
+  owner        User     @relation("OwnedClub", fields: [ownerId], references: [id])
+  members      User[]
+  ownerId      String   @unique
 }
 
 model Sport {

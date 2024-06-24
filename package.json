@@ -1,6 +1,6 @@
 {
   "name": "@youngio9/sports-shared-microservices",
-  "version": "1.0.71",
+  "version": "1.0.72",
   "description": "Shared utils for sports management microservices app",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
