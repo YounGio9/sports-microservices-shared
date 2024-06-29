@@ -50,7 +50,7 @@ model Club {
 
 model Sport {
   id                String   @id @default(uuid())
-  name              String
+  name              String   @unique
   minPlayersPerGame Int
   createdAt         DateTime @default(now())
   clubs             Club[]
