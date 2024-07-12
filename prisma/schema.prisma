@@ -26,6 +26,8 @@ model User {
   createdAt    DateTime @default(now())
   refreshToken String?  @unique
   ownedClub    Club?    @relation("OwnedClub")
+  team         Team?    @relation(fields: [teamId], references: [id])
+  teamId       String?
 }
 
 enum Role {
@@ -46,6 +48,7 @@ model Club {
   owner        User     @relation("OwnedClub", fields: [ownerId], references: [id])
   members      User[]
   ownerId      String   @unique
+  events       Event[]
 }
 
 model Sport {
@@ -54,4 +57,47 @@ model Sport {
   minPlayersPerGame Int
   createdAt         DateTime @default(now())
   clubs             Club[]
+}
+
+model Event {
+  id          String          @id @default(uuid())
+  club        Club            @relation(fields: [clubId], references: [id])
+  clubId      String
+  startDate   DateTime
+  endDate     DateTime
+  place       String
+  createdAt   DateTime        @default(now())
+  eventType   EventType       @relation(fields: [eventTypeId], references: [id])
+  eventTypeId String
+  properties  EventProperty[]
+}
+
+model EventProperty {
+  id      String @id @default(uuid())
+  name    String
+  value   String
+  event   Event  @relation(fields: [eventId], references: [id])
+  eventId String
+}
+
+model EventType {
+  id         String               @id @default(uuid())
+  name       String
+  image      String
+  events     Event[]
+  attributes EventTypeAttribute[]
+  createdAt  DateTime             @default(now())
+}
+
+model EventTypeAttribute {
+  id          String    @id @default(uuid())
+  name        String
+  eventType   EventType @relation(fields: [eventTypeId], references: [id])
+  eventTypeId String
+}
+
+model Team {
+  id      String @id @default(uuid())
+  name    String
+  players User[]
 }
