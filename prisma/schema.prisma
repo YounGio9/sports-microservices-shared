@@ -37,7 +37,7 @@ enum Role {
 }
 
 model Club {
-  id           String   @id @default(uuid())
+  id           String   @id @default(cuid())
   name         String
   sportId      String
   sport        Sport    @relation(fields: [sportId], references: [id])
