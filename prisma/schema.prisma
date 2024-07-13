@@ -49,6 +49,7 @@ model Club {
   members      User[]
   ownerId      String   @unique
   events       Event[]
+  teams        Team[]
 }
 
 model Sport {
@@ -100,4 +101,6 @@ model Team {
   id      String @id @default(uuid())
   name    String
   players User[]
+  club    Club   @relation(fields: [clubId], references: [id])
+  clubId  String
 }
