@@ -83,7 +83,7 @@ model EventProperty {
 
 model EventType {
   id         String               @id @default(uuid())
-  name       String
+  name       String               @unique
   image      String
   events     Event[]
   attributes EventTypeAttribute[]
