@@ -77,7 +77,7 @@ model EventProperty {
   id      String @id @default(uuid())
   name    String
   value   String
-  event   Event  @relation(fields: [eventId], references: [id])
+  event   Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
   eventId String
 }
 
@@ -93,7 +93,7 @@ model EventType {
 model EventTypeAttribute {
   id          String    @id @default(uuid())
   name        String
-  eventType   EventType @relation(fields: [eventTypeId], references: [id])
+  eventType   EventType @relation(fields: [eventTypeId], references: [id], onDelete: Cascade)
   eventTypeId String
 }
 
@@ -101,6 +101,6 @@ model Team {
   id      String @id @default(uuid())
   name    String
   players User[]
-  club    Club   @relation(fields: [clubId], references: [id])
+  club    Club   @relation(fields: [clubId], references: [id], onDelete: Cascade)
   clubId  String
 }
