@@ -82,7 +82,7 @@ model EventProperty {
   id       String  @id @default(uuid())
   name     String
   value    String
-  required Boolean
+  required Boolean @default(true)
   event    Event   @relation(fields: [eventId], references: [id], onDelete: Cascade)
   eventId  String
 }
