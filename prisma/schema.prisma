@@ -71,7 +71,7 @@ model Event {
   endTime       String
   uniform       String
   description   String
-  coachNotes    String
+  coachNotes    String?
   createdAt     DateTime        @default(now())
   eventType     EventType       @relation(fields: [eventTypeName], references: [name])
   eventTypeName String
