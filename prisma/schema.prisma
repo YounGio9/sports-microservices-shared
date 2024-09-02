@@ -61,24 +61,30 @@ model Sport {
 }
 
 model Event {
-  id          String          @id @default(uuid())
-  club        Club            @relation(fields: [clubId], references: [id])
-  clubId      String
-  startDate   DateTime
-  endDate     DateTime
-  place       String
-  createdAt   DateTime        @default(now())
-  eventType   EventType       @relation(fields: [eventTypeId], references: [id])
-  eventTypeId String
-  properties  EventProperty[]
+  id            String          @id @default(uuid())
+  club          Club            @relation(fields: [clubId], references: [id])
+  clubId        String
+  name          String
+  date          String
+  place         String
+  startTime     String
+  endTime       String
+  uniform       String
+  description   String
+  coachNotes    String
+  createdAt     DateTime        @default(now())
+  eventType     EventType       @relation(fields: [eventTypeName], references: [name])
+  eventTypeName String
+  properties    EventProperty[]
 }
 
 model EventProperty {
-  id      String @id @default(uuid())
-  name    String
-  value   String
-  event   Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
-  eventId String
+  id       String  @id @default(uuid())
+  name     String
+  value    String
+  required Boolean
+  event    Event   @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  eventId  String
 }
 
 model EventType {
@@ -91,10 +97,10 @@ model EventType {
 }
 
 model EventTypeAttribute {
-  id          String    @id @default(uuid())
-  name        String
-  eventType   EventType @relation(fields: [eventTypeId], references: [id], onDelete: Cascade)
-  eventTypeId String
+  id            String    @id @default(uuid())
+  name          String
+  eventType     EventType @relation(fields: [eventTypeName], references: [name], onDelete: Cascade)
+  eventTypeName String
 }
 
 model Team {

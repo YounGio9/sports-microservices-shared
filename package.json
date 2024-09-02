@@ -1,6 +1,6 @@
 {
   "name": "@youngio9/clubconnect-shared",
-  "version": "1.0.3",
+  "version": "1.0.8",
   "description": "Shared utils for sports management microservices app",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -11,7 +11,8 @@
     "prebuild": "npm run clean",
     "build": "tsc --module commonjs",
     "preversion": "npm run build",
-    "postversion": "git push --follow-tags"
+    "postversion": "git push --follow-tags",
+    "db:migrate": "npx prisma migrate"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
