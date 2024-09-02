@@ -79,12 +79,11 @@ model Event {
 }
 
 model EventProperty {
-  id       String  @id @default(uuid())
-  name     String
-  value    String
-  required Boolean @default(true)
-  event    Event   @relation(fields: [eventId], references: [id], onDelete: Cascade)
-  eventId  String
+  id      String @id @default(uuid())
+  name    String // Should be an event Type attribute
+  value   String
+  event   Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  eventId String
 }
 
 model EventType {
@@ -99,6 +98,8 @@ model EventType {
 model EventTypeAttribute {
   id            String    @id @default(uuid())
   name          String
+  required      Boolean   @default(true)
+  hasBigContent Boolean   @default(false)
   eventType     EventType @relation(fields: [eventTypeName], references: [name], onDelete: Cascade)
   eventTypeName String
 }
