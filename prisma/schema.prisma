@@ -98,6 +98,7 @@ model EventType {
 model EventTypeAttribute {
   id            String    @id @default(uuid())
   name          String
+  label         String
   required      Boolean   @default(true)
   hasBigContent Boolean   @default(false)
   eventType     EventType @relation(fields: [eventTypeName], references: [name], onDelete: Cascade)
