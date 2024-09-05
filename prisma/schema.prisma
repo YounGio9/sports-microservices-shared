@@ -38,20 +38,20 @@ enum Role {
 }
 
 model Club {
-  id           String         @id @default(cuid())
-  name         String
-  sportId      String
-  sport        Sport          @relation(fields: [sportId], references: [id])
-  teamCapacity Int
-  teamAgeRange String
-  picture      String?
-  createdAt    DateTime       @default(now())
-  owner        User           @relation("OwnedClub", fields: [ownerId], references: [id])
-  members      User[]
-  ownerId      String         @unique
-  events       Event[]
-  teams        Team[]
-  Contribution Contribution[]
+  id            String         @id @default(cuid())
+  name          String
+  sportId       String
+  sport         Sport          @relation(fields: [sportId], references: [id])
+  teamCapacity  Int
+  teamAgeRange  String
+  picture       String?
+  createdAt     DateTime       @default(now())
+  owner         User           @relation("OwnedClub", fields: [ownerId], references: [id])
+  members       User[]
+  ownerId       String         @unique
+  events        Event[]
+  teams         Team[]
+  contributions Contribution[]
 }
 
 model Sport {
