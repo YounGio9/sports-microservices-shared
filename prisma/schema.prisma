@@ -14,20 +14,21 @@ datasource db {
 }
 
 model User {
-  id           String   @id @default(uuid())
-  firstName    String
-  lastName     String
-  email        String   @unique
-  password     String
-  picture      String?
-  role         Role     @default(PLAYER)
-  clubId       String?
-  club         Club?    @relation(fields: [clubId], references: [id])
-  createdAt    DateTime @default(now())
-  refreshToken String?  @unique
-  ownedClub    Club?    @relation("OwnedClub")
-  team         Team?    @relation(fields: [teamId], references: [id])
-  teamId       String?
+  id                 String               @id @default(uuid())
+  firstName          String
+  lastName           String
+  email              String               @unique
+  password           String
+  picture            String?
+  role               Role                 @default(PLAYER)
+  clubId             String?
+  club               Club?                @relation(fields: [clubId], references: [id])
+  createdAt          DateTime             @default(now())
+  refreshToken       String?              @unique
+  ownedClub          Club?                @relation("OwnedClub")
+  team               Team?                @relation(fields: [teamId], references: [id])
+  teamId             String?
+  MemberContribution MemberContribution[]
 }
 
 enum Role {
@@ -111,4 +112,21 @@ model Team {
   players User[]
   club    Club   @relation(fields: [clubId], references: [id], onDelete: Cascade)
   clubId  String
+}
+
+model Contribution {
+  id                   String               @id @default(uuid())
+  name                 String
+  amount               Int
+  endDate              DateTime
+  membersContributions MemberContribution[]
+}
+
+model MemberContribution {
+  id             String       @id @default(uuid())
+  member         User         @relation(fields: [userId], references: [id])
+  userId         String
+  paid           Boolean      @default(false)
+  contribution   Contribution @relation(fields: [contributionId], references: [id])
+  contributionId String
 }
