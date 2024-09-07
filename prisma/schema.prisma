@@ -130,6 +130,6 @@ model MemberContribution {
   member         User         @relation(fields: [userId], references: [id])
   userId         String
   paid           Boolean      @default(false)
-  contribution   Contribution @relation(fields: [contributionId], references: [id])
+  contribution   Contribution @relation(fields: [contributionId], references: [id], onDelete: Cascade)
   contributionId String
 }
