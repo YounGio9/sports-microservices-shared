@@ -119,7 +119,7 @@ model Contribution {
   id                   String               @id @default(uuid())
   name                 String
   amount               Int
-  endDate              DateTime
+  endDate              String
   membersContributions MemberContribution[]
   club                 Club                 @relation(fields: [clubId], references: [id])
   clubId               String
