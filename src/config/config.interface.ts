@@ -1,4 +1,4 @@
-import { KafkaOptions, TcpOptions } from "@nestjs/microservices";
+import { KafkaOptions, RedisOptions, TcpOptions } from "@nestjs/microservices";
 
 export interface ConfigDatabase {
   url: string;
@@ -52,5 +52,5 @@ export interface ConfigData {
   paymentService?: TcpOptions;
   statisticService?: TcpOptions;
   notificationService?: KafkaOptions;
-  communicationService?: KafkaOptions;
+  communicationService?: RedisOptions;
 }

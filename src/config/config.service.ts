@@ -31,22 +31,25 @@ export class ConfigService {
         access_token_secret: env.JWT_ACCESS_TOKEN_SECRET!,
         refresh_token_secret: env.JWT_REFRESH_TOKEN_SECRET!,
       },
-      // notificationService: {
-      //   options: {
-      //     client: {
-      //       brokers: [`${env.KAFKA_HOST}:${env.KAFKA_PORT}`],
-      //     },
-      //     consumer: {
-      //       groupId: `notification-consumer`,
-      //     },
-      //   },
-      //   transport: Transport.KAFKA,
-      // },
       authService: {
         transport: Transport.TCP,
         options: {
           host: "localhost",
           port: 3001,
+        },
+      },
+      communicationService: {
+        transport: Transport.REDIS,
+        options: {
+          host: env.REDIS_HOST,
+          port: parseInt(env.REDIS_PORT ?? "28700"),
+          password: env.REDIS_PASSWORD,
+          username: env.REDIS_USERNAME,
+          retryAttempts: parseInt(env.REDIS_ATTEMPTS ?? "3"),
+          retryDelay: parseInt(env.REDIS_DELAY ?? "2000"),
+          tls: {
+            rejectUnauthorized: false,
+          },
         },
       },
     };
