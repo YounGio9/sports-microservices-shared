@@ -42,11 +42,11 @@ export class ConfigService {
         transport: Transport.REDIS,
         options: {
           host: env.REDIS_HOST,
-          port: parseInt(env.REDIS_PORT ?? "28700"),
+          port: Number(env.REDIS_PORT),
           password: env.REDIS_PASSWORD,
           username: env.REDIS_USERNAME,
-          retryAttempts: parseInt(env.REDIS_ATTEMPTS ?? "3"),
-          retryDelay: parseInt(env.REDIS_DELAY ?? "2000"),
+          retryAttempts: Number(env.REDIS_ATTEMPTS),
+          retryDelay: Number(env.REDIS_DELAY),
           tls: {
             rejectUnauthorized: false,
           },
