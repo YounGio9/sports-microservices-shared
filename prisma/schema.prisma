@@ -123,6 +123,7 @@ model Contribution {
   membersContributions MemberContribution[]
   club                 Club                 @relation(fields: [clubId], references: [id])
   clubId               String
+  createdAt            DateTime             @default(now())
 }
 
 model MemberContribution {
