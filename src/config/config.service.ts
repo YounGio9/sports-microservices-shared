@@ -7,6 +7,8 @@ import {
   ConfigSwagger,
 } from "./config.interface";
 import { Transport } from "@nestjs/microservices";
+import path from "path";
+import fs = require("fs");
 @Injectable()
 export class ConfigService {
   private config: ConfigData;
@@ -39,6 +41,25 @@ export class ConfigService {
         },
       },
       communicationService: {
+        transport: Transport.KAFKA,
+        options: {
+          client: {
+            brokers: [`${env.KAFKA_HOST}:${env.KAFKA_PORT}`],
+            ssl: {
+              ca: [fs.readFileSync(path.resolve(env.KAKA_CA ?? ""))],
+            },
+            sasl: {
+              username: String(env.KAFKA_USERNAME),
+              password: String(env.KAFKA_HOST),
+              mechanism: "plain",
+            },
+          },
+          consumer: {
+            groupId: "club-messages",
+          },
+        },
+      },
+      notificationService: {
         transport: Transport.REDIS,
         options: {
           host: env.REDIS_HOST,

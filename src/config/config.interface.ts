@@ -51,6 +51,6 @@ export interface ConfigData {
   eventService?: TcpOptions;
   paymentService?: TcpOptions;
   statisticService?: TcpOptions;
-  notificationService?: KafkaOptions;
-  communicationService?: RedisOptions;
+  notificationService?: RedisOptions;
+  communicationService?: KafkaOptions;
 }
