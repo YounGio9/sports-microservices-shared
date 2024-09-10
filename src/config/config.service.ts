@@ -45,12 +45,10 @@ export class ConfigService {
         options: {
           client: {
             brokers: [`${env.KAFKA_HOST}:${env.KAFKA_PORT}`],
-            ssl: {
-              ca: [fs.readFileSync(path.resolve(env.KAKA_CA ?? ""))],
-            },
+            ssl: { ca: env.KAFKA_CA },
             sasl: {
               username: String(env.KAFKA_USERNAME),
-              password: String(env.KAFKA_HOST),
+              password: String(env.KAFKA_PASSWORD),
               mechanism: "plain",
             },
           },
