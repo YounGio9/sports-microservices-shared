@@ -13,7 +13,6 @@ export class DatabaseModule {
     const Prisma = {
       provide: PrismaService,
       useFactory: (configService: ConfigService) => {
-        console.log(configService.get().db.url, "DB URL");
         return new PrismaService({
           datasources: {
             db: {

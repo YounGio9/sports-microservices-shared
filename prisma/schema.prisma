@@ -30,6 +30,7 @@ model User {
   teamId             String?
   MemberContribution MemberContribution[]
   Message            Message[]
+  fcmToken           String?
 }
 
 enum Role {
@@ -53,7 +54,8 @@ model Club {
   events        Event[]
   teams         Team[]
   contributions Contribution[]
-  Message       Message[]
+  messages      Message[]
+  guidelinesUrl String
 }
 
 model Sport {
