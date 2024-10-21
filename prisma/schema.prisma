@@ -31,6 +31,9 @@ model User {
   MemberContribution MemberContribution[]
   Message            Message[]
   fcmToken           String?
+  payments           Payment[]
+  customerId         String?
+  walletEntry        WalletEntry[]
 }
 
 enum Role {
@@ -56,6 +59,8 @@ model Club {
   contributions Contribution[]
   messages      Message[]
   guidelinesUrl String
+  offers        Offer[]
+  payments      Payment[]
 }
 
 model Sport {
@@ -149,4 +154,36 @@ model Message {
   createdAt  DateTime  @default(now())
   sentAt     DateTime?
   senderName String
+}
+
+model Offer {
+  id          String   @id @default(uuid())
+  club        Club     @relation(fields: [clubId], references: [id])
+  clubId      String
+  name        String
+  description String
+  price       Float
+  createdAt   DateTime @default(now())
+  period      Int // In months
+}
+
+model Payment {
+  id        String   @id @default(uuid())
+  amount    Float
+  paidAt    DateTime
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  club      Club     @relation(fields: [clubId], references: [id])
+  clubId    String
+}
+
+model WalletEntry {
+  id          String   @id @default(uuid())
+  credit      Float
+  debit       Float
+  description String
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
 }
