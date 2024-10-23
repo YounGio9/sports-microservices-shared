@@ -34,6 +34,17 @@ model User {
   payments           Payment[]
   customerId         String?
   walletEntry        WalletEntry[]
+  subscriptions      Subscription[]
+}
+
+model Subscription {
+  id        String   @id @default(uuid())
+  offerId   String
+  offer     Offer    @relation(fields: [offerId], references: [id])
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  expiresAt DateTime
 }
 
 enum Role {
@@ -157,14 +168,15 @@ model Message {
 }
 
 model Offer {
-  id          String   @id @default(uuid())
-  club        Club     @relation(fields: [clubId], references: [id])
-  clubId      String
-  name        String
-  description String
-  price       Float
-  createdAt   DateTime @default(now())
-  period      Int // In months
+  id            String         @id @default(uuid())
+  club          Club           @relation(fields: [clubId], references: [id])
+  clubId        String
+  name          String
+  description   String
+  price         Float
+  createdAt     DateTime       @default(now())
+  period        Int // In months
+  subscriptions Subscription[]
 }
 
 model Payment {
