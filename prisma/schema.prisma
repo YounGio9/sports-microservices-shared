@@ -14,27 +14,28 @@ datasource db {
 }
 
 model User {
-  id                 String               @id @default(uuid())
-  firstName          String
-  lastName           String
-  email              String               @unique
-  password           String
-  picture            String?
-  role               Role                 @default(PLAYER)
-  clubId             String?
-  club               Club?                @relation(fields: [clubId], references: [id])
-  createdAt          DateTime             @default(now())
-  refreshToken       String?              @unique
-  ownedClub          Club?                @relation("OwnedClub")
-  team               Team?                @relation(fields: [teamId], references: [id])
-  teamId             String?
-  MemberContribution MemberContribution[]
-  Message            Message[]
-  fcmToken           String?
-  payments           Payment[]
-  customerId         String?
-  walletEntry        WalletEntry[]
-  subscriptions      Subscription[]
+  id                   String               @id @default(uuid())
+  firstName            String
+  lastName             String
+  email                String               @unique
+  password             String
+  picture              String?
+  role                 Role                 @default(PLAYER)
+  clubId               String?
+  club                 Club?                @relation(fields: [clubId], references: [id])
+  createdAt            DateTime             @default(now())
+  refreshToken         String?              @unique
+  ownedClub            Club?                @relation("OwnedClub")
+  team                 Team?                @relation(fields: [teamId], references: [id])
+  teamId               String?
+  memberContributions  MemberContribution[]
+  Message              Message[]
+  fcmToken             String?
+  payments             Payment[]
+  customerId           String?
+  walletEntry          WalletEntry[]
+  subscriptions        Subscription[]
+  memberAvailabilities MemberAvailability[]
 }
 
 model Subscription {
@@ -83,21 +84,22 @@ model Sport {
 }
 
 model Event {
-  id            String          @id @default(uuid())
-  club          Club            @relation(fields: [clubId], references: [id])
-  clubId        String
-  name          String
-  date          String
-  place         String
-  startTime     String
-  endTime       String
-  uniform       String
-  description   String
-  coachNotes    String?
-  createdAt     DateTime        @default(now())
-  eventType     EventType       @relation(fields: [eventTypeName], references: [name])
-  eventTypeName String
-  properties    EventProperty[]
+  id                    String               @id @default(uuid())
+  club                  Club                 @relation(fields: [clubId], references: [id])
+  clubId                String
+  name                  String
+  date                  String
+  place                 String
+  startTime             String
+  endTime               String
+  uniform               String
+  description           String
+  coachNotes            String?
+  createdAt             DateTime             @default(now())
+  eventType             EventType            @relation(fields: [eventTypeName], references: [name])
+  eventTypeName         String
+  properties            EventProperty[]
+  membersAvailabilities MemberAvailability[]
 }
 
 model EventProperty {
@@ -153,6 +155,15 @@ model MemberContribution {
   paid           Boolean      @default(false)
   contribution   Contribution @relation(fields: [contributionId], references: [id], onDelete: Cascade)
   contributionId String
+}
+
+model MemberAvailability {
+  id        String  @id @default(uuid())
+  userId    String
+  member    User    @relation(fields: [userId], references: [id])
+  available Boolean
+  event     Event   @relation(fields: [eventId], references: [id])
+  eventId   String
 }
 
 model Message {
